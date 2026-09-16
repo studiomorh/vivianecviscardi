@@ -1,14 +1,13 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Outfit', ui-sans-serif, sans-serif;
+  --font-sans: 'Montserrat', ui-sans-serif, sans-serif;
   --color-ink: #07101f;
   --color-navy: #0a1630;
   --color-navy-deep: #050b18;
-  --color-mist: #dce4f0;
-  --color-fog: #a8b4c8;
-  --color-line: rgba(255, 255, 255, 0.28);
+  --color-mist: #e8edf5;
+  --color-fog: #b7c0d0;
+  --color-line: rgba(255, 255, 255, 0.55);
 }
 
 @layer base {
@@ -27,7 +26,7 @@
   }
 
   ::selection {
-    background: rgba(220, 228, 240, 0.2);
+    background: rgba(232, 237, 245, 0.2);
     color: white;
   }
 }

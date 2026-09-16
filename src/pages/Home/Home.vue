@@ -148,7 +148,7 @@ const fadeUp = {
 <template>
   <div class="relative min-h-screen overflow-x-hidden bg-navy-deep text-mist">
     <div
-      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.07),transparent_55%),linear-gradient(180deg,#0a1630_0%,#050b18_45%,#07101f_100%)]"
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.06),transparent_55%),linear-gradient(180deg,#0a1630_0%,#050b18_45%,#07101f_100%)]"
     />
     <img
       src="../../assets/images/organic-lines.svg"
@@ -156,110 +156,106 @@ const fadeUp = {
       class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-100"
     />
 
-    <div class="relative z-10 mx-auto w-full max-w-3xl px-6 pb-20 sm:px-8">
+    <div class="relative z-10 mx-auto w-full max-w-[34rem] px-6 pb-24 sm:px-8">
       <!-- Hero -->
       <motion.header
-        class="flex min-h-[100svh] flex-col items-center justify-center py-16 text-center"
+        class="flex min-h-[100svh] flex-col items-center justify-center py-20 text-center"
         :initial="{ opacity: 0 }"
         :animate="{ opacity: 1 }"
         :transition="{ duration: 1.1, ease: 'easeOut' }"
       >
-        <motion.p
-          class="font-sans text-[0.7rem] font-light uppercase tracking-[0.55em] text-fog"
-          :initial="{ opacity: 0, y: 12 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: 0.15, duration: 0.8 }"
-        >
-          2026
-        </motion.p>
-
         <motion.h1
-          class="mt-8 font-display text-5xl font-medium uppercase leading-[0.95] tracking-[0.18em] text-white sm:text-6xl md:text-7xl"
+          class="font-sans text-[1.85rem] font-semibold uppercase leading-[1.15] tracking-[0.28em] text-white sm:text-[2.35rem] sm:tracking-[0.32em]"
           :initial="{ opacity: 0, y: 18 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: 0.3, duration: 0.9 }"
+          :transition="{ delay: 0.2, duration: 0.9 }"
         >
           Viviane C.
-          <span class="mt-3 block tracking-[0.28em]">Viscardi</span>
+          <span class="mt-3 block tracking-[0.36em]">Viscardi</span>
         </motion.h1>
 
         <motion.p
-          class="mt-6 font-sans text-xs font-light uppercase tracking-[0.45em] text-fog"
+          class="mt-7 font-sans text-[0.68rem] font-medium uppercase tracking-[0.42em] text-white/85"
           :initial="{ opacity: 0 }"
           :animate="{ opacity: 1 }"
-          :transition="{ delay: 0.55, duration: 0.8 }"
+          :transition="{ delay: 0.45, duration: 0.8 }"
         >
           Massoterapeuta
         </motion.p>
 
         <motion.p
-          class="mt-10 max-w-md font-display text-xl font-normal italic leading-relaxed text-mist/90 sm:text-2xl"
-          :initial="{ opacity: 0, y: 14 }"
+          class="mt-5 font-sans text-[0.65rem] font-light uppercase tracking-[0.5em] text-fog"
+          :initial="{ opacity: 0, y: 10 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: 0.7, duration: 0.85 }"
+          :transition="{ delay: 0.55, duration: 0.8 }"
         >
-          Un percorso dedicato al tuo benessere, tra massaggi, trattamenti e cura di sé.
+          2026
+        </motion.p>
+
+        <motion.p
+          class="mt-12 border border-white/70 px-5 py-3.5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] text-white sm:tracking-[0.34em]"
+          :initial="{ opacity: 0, y: 10 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ delay: 0.7, duration: 0.75 }"
+        >
+          Massaggio · I Trattamenti · Percorso
         </motion.p>
 
         <motion.div
-          class="mt-12 flex flex-col items-center gap-4 sm:flex-row"
+          class="mt-12 flex w-full max-w-sm flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:justify-center"
           :initial="{ opacity: 0, y: 10 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: 0.9, duration: 0.75 }"
+          :transition="{ delay: 0.85, duration: 0.75 }"
         >
           <a
-            :href="whatsapp"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex min-w-[220px] items-center justify-center border border-line px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:border-white hover:bg-white/5"
+            href="#regalo"
+            class="inline-flex min-h-12 items-center justify-center border border-white/70 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
           >
-            Invia messaggio
+            Buono regalo
           </a>
           <a
             href="#trattamenti"
-            class="inline-flex min-w-[220px] items-center justify-center px-8 py-3.5 font-sans text-[0.7rem] font-light uppercase tracking-[0.35em] text-fog transition duration-300 hover:text-white"
+            class="inline-flex min-h-12 items-center justify-center border border-white/70 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white/10"
           >
-            Scopri i trattamenti
+            I trattamenti
           </a>
         </motion.div>
-
-        <p
-          class="mt-16 border border-line px-6 py-3 font-sans text-[0.65rem] font-light uppercase tracking-[0.4em] text-mist/80"
-        >
-          Massaggio · Trattamenti · Percorso
-        </p>
       </motion.header>
 
       <!-- Treatments -->
-      <section id="trattamenti" class="space-y-24 py-10 sm:space-y-28">
+      <section id="trattamenti" class="space-y-28 py-8 sm:space-y-32">
         <motion.article
           v-for="(item, index) in treatments"
           :key="item.title"
-          class="mx-auto max-w-xl text-center"
+          class="mx-auto max-w-md text-center"
           v-bind="fadeUp"
           :transition="{ ...fadeUp.transition, delay: index * 0.05 }"
         >
           <h2
-            class="font-display text-3xl font-medium uppercase tracking-[0.22em] text-white sm:text-4xl"
+            class="font-sans text-[1.15rem] font-semibold uppercase leading-snug tracking-[0.22em] text-white sm:text-[1.3rem] sm:tracking-[0.26em]"
           >
             {{ item.title }}
           </h2>
           <p
-            class="mt-4 font-sans text-[0.65rem] font-light uppercase tracking-[0.4em] text-fog"
+            class="mt-5 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-white/90"
           >
             Durata: {{ item.duration }}
           </p>
-          <p class="mt-8 font-sans text-sm font-light leading-7 text-mist/90 sm:text-[0.95rem]">
+          <p
+            class="mt-8 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/88"
+          >
             {{ item.intro }}
           </p>
-          <p class="mt-5 font-sans text-sm font-light leading-7 text-fog sm:text-[0.95rem]">
+          <p
+            class="mt-5 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/78"
+          >
             {{ item.body }}
           </p>
-          <ul class="mt-8 space-y-2.5">
+          <ul class="mt-9 space-y-3">
             <li
               v-for="benefit in item.benefits"
               :key="benefit"
-              class="font-sans text-sm font-light text-mist/85"
+              class="font-sans text-[0.9rem] font-medium leading-snug text-white"
             >
               {{ benefit }}
             </li>
@@ -269,62 +265,66 @@ const fadeUp = {
 
       <!-- Mid CTA -->
       <motion.section
-        class="flex flex-col items-center py-24 text-center"
+        class="flex flex-col items-center py-28 text-center"
         v-bind="fadeUp"
       >
         <a
           :href="whatsapp"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-w-[240px] items-center justify-center border border-white/40 px-10 py-4 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
+          class="inline-flex min-w-[240px] items-center justify-center border border-white/70 px-10 py-4 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
         >
           Invia messaggio
         </a>
-        <p class="mt-8 max-w-sm font-display text-xl italic leading-relaxed text-mist/90">
+        <p
+          class="mt-8 max-w-sm font-sans text-[0.92rem] font-normal leading-[1.7] text-white/80"
+        >
           Ti aspetto per accompagnarti in un percorso dedicato al tuo benessere.
         </p>
       </motion.section>
 
       <!-- Gift voucher builder -->
-      <motion.section id="regalo" class="pb-10 pt-6 text-center" v-bind="fadeUp">
+      <motion.section id="regalo" class="pb-10 pt-4 text-center" v-bind="fadeUp">
         <h2
-          class="font-display text-4xl font-medium uppercase tracking-[0.28em] text-white sm:text-5xl"
+          class="font-sans text-[1.7rem] font-semibold uppercase leading-[1.2] tracking-[0.28em] text-white sm:text-[2rem] sm:tracking-[0.32em]"
         >
           Regala
-          <span class="mt-2 block tracking-[0.22em]">Benessere</span>
+          <span class="mt-2 block tracking-[0.28em]">Benessere</span>
         </h2>
-        <div class="mx-auto mt-8 h-px w-24 bg-line" />
-        <p
-          class="mt-6 font-sans text-[0.7rem] font-light uppercase tracking-[0.45em] text-fog"
+
+        <div
+          class="mx-auto mt-10 inline-flex bg-white px-8 py-2.5 font-sans text-[0.62rem] font-semibold uppercase tracking-[0.35em] text-navy-deep"
         >
           Buono regalo
-        </p>
+        </div>
 
         <p
-          class="mx-auto mt-12 max-w-md font-display text-2xl font-normal italic leading-relaxed text-mist/90 sm:text-3xl"
+          class="mx-auto mt-10 max-w-md font-sans text-[0.95rem] font-normal leading-[1.7] text-white/90"
         >
           Da 1 a 5 massaggi, da scegliere per te o da regalare!
         </p>
-        <p class="mx-auto mt-6 max-w-md font-sans text-sm font-light leading-7 text-fog">
+        <p
+          class="mx-auto mt-5 max-w-md font-sans text-[0.9rem] font-normal leading-[1.7] text-white/75"
+        >
           Componi il tuo buono scegliendo liberamente tra le seguenti tecniche:
         </p>
 
         <div class="mx-auto mt-12 max-w-md">
           <p
-            class="font-sans text-[0.65rem] font-light uppercase tracking-[0.35em] text-fog"
+            class="font-sans text-[0.62rem] font-medium uppercase tracking-[0.32em] text-fog"
           >
             Quanti massaggi?
           </p>
-          <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5">
             <button
               v-for="size in packageSizes"
               :key="size"
               type="button"
-              class="inline-flex h-11 w-11 items-center justify-center border font-sans text-sm transition duration-300"
+              class="inline-flex h-11 w-11 items-center justify-center border font-sans text-sm font-medium transition duration-300"
               :class="
                 packageSize === size
                   ? 'border-white bg-white text-navy-deep'
-                  : 'border-line text-mist hover:border-white hover:text-white'
+                  : 'border-white/70 text-mist hover:border-white hover:text-white'
               "
               :aria-pressed="packageSize === size"
               @click="setPackageSize(size)"
@@ -335,32 +335,34 @@ const fadeUp = {
         </div>
 
         <div class="mx-auto mt-12 max-w-md text-left">
-          <div class="mb-6 flex items-center justify-between gap-4">
+          <div class="mb-5 flex items-center justify-between gap-4">
             <p
-              class="font-sans text-[0.65rem] font-light uppercase tracking-[0.35em] text-fog"
+              class="font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] text-fog"
             >
               Scegli le tecniche
             </p>
-            <p class="font-sans text-[0.65rem] font-light uppercase tracking-[0.25em] text-mist/80">
+            <p
+              class="font-sans text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/75"
+            >
               {{ allocated }} di {{ packageSize }} selezionati
             </p>
           </div>
 
-          <ul class="space-y-3">
+          <ul class="space-y-1">
             <li
               v-for="technique in giftTechniques"
               :key="technique"
-              class="flex items-center justify-between gap-4 border-b border-line/40 py-3"
+              class="flex items-center justify-between gap-4 border-b border-white/20 py-3.5"
             >
               <span
-                class="font-sans text-sm font-light uppercase tracking-[0.12em] text-mist/90"
+                class="font-sans text-[0.78rem] font-medium uppercase tracking-[0.1em] text-white/90"
               >
                 {{ technique }}
               </span>
               <div class="flex shrink-0 items-center gap-3">
                 <button
                   type="button"
-                  class="inline-flex h-8 w-8 items-center justify-center border border-line text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                  class="inline-flex h-8 w-8 items-center justify-center border border-white/70 text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
                   :disabled="counts[technique] <= 0"
                   :aria-label="`Riduci ${technique}`"
                   @click="dec(technique)"
@@ -368,13 +370,13 @@ const fadeUp = {
                   −
                 </button>
                 <span
-                  class="w-4 text-center font-sans text-sm tabular-nums text-white"
+                  class="w-4 text-center font-sans text-sm font-medium tabular-nums text-white"
                 >
                   {{ counts[technique] }}
                 </span>
                 <button
                   type="button"
-                  class="inline-flex h-8 w-8 items-center justify-center border border-line text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                  class="inline-flex h-8 w-8 items-center justify-center border border-white/70 text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
                   :disabled="remaining <= 0"
                   :aria-label="`Aumenta ${technique}`"
                   @click="inc(technique)"
@@ -388,7 +390,7 @@ const fadeUp = {
 
         <p
           v-if="!isComplete"
-          class="mx-auto mt-8 max-w-md font-sans text-sm font-light text-fog"
+          class="mx-auto mt-8 max-w-md font-sans text-[0.85rem] font-normal text-white/65"
         >
           Distribuisci tutti i {{ packageSize }} massaggi per continuare.
         </p>
@@ -398,7 +400,7 @@ const fadeUp = {
           :href="packageWhatsappHref"
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-10 inline-flex min-w-[240px] items-center justify-center border border-line bg-white/10 px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
+          class="mt-10 inline-flex min-w-[240px] items-center justify-center border border-white/70 bg-white/10 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
         >
           Monta il pacchetto
         </a>
@@ -406,7 +408,7 @@ const fadeUp = {
           v-else
           type="button"
           disabled
-          class="mt-10 inline-flex min-w-[240px] cursor-not-allowed items-center justify-center border border-line/40 px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-fog/50"
+          class="mt-10 inline-flex min-w-[240px] cursor-not-allowed items-center justify-center border border-white/30 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white/40"
         >
           Monta il pacchetto
         </button>
@@ -415,17 +417,17 @@ const fadeUp = {
       <!-- Contacts -->
       <motion.footer
         id="contatti"
-        class="mt-20 border-t border-line pt-16 text-center"
+        class="mt-24 border-t border-white/25 pt-16 text-center"
         v-bind="fadeUp"
       >
         <p
-          class="font-sans text-[0.65rem] font-light uppercase tracking-[0.45em] text-fog"
+          class="font-sans text-[0.65rem] font-medium uppercase tracking-[0.42em] text-white"
         >
           Contatti
         </p>
         <a
           :href="phoneHref"
-          class="mt-8 inline-block font-sans text-lg font-light tracking-[0.12em] text-mist transition hover:text-white"
+          class="mt-8 inline-block font-sans text-base font-medium tracking-[0.14em] text-white transition hover:opacity-80"
         >
           {{ phoneDisplay }}
         </a>
@@ -433,7 +435,7 @@ const fadeUp = {
           :href="whatsapp"
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-10 inline-flex items-center justify-center border border-line px-8 py-3 font-sans text-[0.65rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
+          class="mt-10 inline-flex items-center justify-center border border-white/70 px-8 py-3 font-sans text-[0.62rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
         >
           Scrivimi su WhatsApp
         </a>
