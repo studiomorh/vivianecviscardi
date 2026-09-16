@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" fill="none" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="leafFade" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#leafFade)" stroke-width="1.2" stroke-linecap="round" opacity="0.9">
+    <path d="M-40 120 C80 40, 180 200, 320 80 S560 40, 720 160"/>
+    <path d="M-20 280 C100 200, 220 360, 380 240 S620 180, 780 300"/>
+    <path d="M40 480 C160 380, 280 540, 440 420 S700 360, 860 500"/>
+    <path d="M120 40 C180 120, 140 200, 220 280"/>
+    <path d="M520 60 C580 140, 540 220, 640 300"/>
+    <path d="M680 420 C740 500, 700 580, 800 660"/>
+    <path d="M60 700 C140 780, 100 860, 200 940"/>
+    <path d="M420 820 C500 900, 460 980, 560 1060"/>
+  </g>
+</svg>
