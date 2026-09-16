@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { motion } from 'motion-v'
-import bgMobile from '../../assets/images/bg-mobile.jpg'
+import bgMobile from '../../assets/images/bg-mobile.webp'
 
 const whatsappBase = 'https://wa.me/393343101446'
 const whatsapp = whatsappBase
@@ -158,14 +158,10 @@ const fadeUp = {
       class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover sm:block"
     />
 
-    <!-- Mobile floral background from brand PDF -->
+    <!-- Mobile floral background from brand PDF (high-res) -->
     <div
       class="pointer-events-none absolute inset-0 bg-navy-deep bg-repeat-y bg-[length:100%_auto] sm:hidden"
       :style="{ backgroundImage: `url(${bgMobile})` }"
-      aria-hidden="true"
-    />
-    <div
-      class="pointer-events-none absolute inset-0 bg-navy-deep/20 sm:hidden"
       aria-hidden="true"
     />
 
