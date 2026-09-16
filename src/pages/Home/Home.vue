@@ -201,20 +201,11 @@ const fadeUp = {
           2026
         </motion.p>
 
-        <motion.p
-          class="mt-12 border border-white/70 px-5 py-3.5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] text-white sm:tracking-[0.34em]"
-          :initial="{ opacity: 0, y: 10 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: 0.7, duration: 0.75 }"
-        >
-          Massaggio · I Trattamenti · Percorso
-        </motion.p>
-
         <motion.div
           class="mt-12 flex w-full max-w-sm flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:justify-center"
           :initial="{ opacity: 0, y: 10 }"
           :animate="{ opacity: 1, y: 0 }"
-          :transition="{ delay: 0.85, duration: 0.75 }"
+          :transition="{ delay: 0.7, duration: 0.75 }"
         >
           <a
             href="#regalo"
