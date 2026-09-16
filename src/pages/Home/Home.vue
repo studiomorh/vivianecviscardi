@@ -1,7 +1,9 @@
 <script setup>
+import { computed, reactive, ref } from 'vue'
 import { motion } from 'motion-v'
 
-const whatsapp = 'https://wa.me/393343101446'
+const whatsappBase = 'https://wa.me/393343101446'
+const whatsapp = whatsappBase
 const phoneDisplay = '334.3101446'
 const phoneHref = 'tel:+393343101446'
 
@@ -70,6 +72,70 @@ const giftTechniques = [
   'Massaggio Rilassante',
   'Massaggio Yoga Ayurvedico',
 ]
+
+const packageSizes = [1, 2, 3, 4, 5]
+const packageSize = ref(3)
+const counts = reactive(
+  Object.fromEntries(giftTechniques.map((technique) => [technique, 0])),
+)
+
+const allocated = computed(() =>
+  giftTechniques.reduce((sum, technique) => sum + counts[technique], 0),
+)
+const remaining = computed(() => packageSize.value - allocated.value)
+const isComplete = computed(
+  () => packageSize.value >= 1 && allocated.value === packageSize.value,
+)
+
+const selectedLines = computed(() =>
+  giftTechniques
+    .filter((technique) => counts[technique] > 0)
+    .map((technique) => `- ${technique}: ${counts[technique]}`),
+)
+
+const packageMessage = computed(() => {
+  const lines = [
+    'Ciao Viviane! Vorrei comporre un buono regalo.',
+    '',
+    `Totale massaggi: ${packageSize.value}`,
+    '',
+    ...selectedLines.value,
+    '',
+    'Puoi darmi più informazioni? Grazie!',
+  ]
+  return lines.join('\n')
+})
+
+const packageWhatsappHref = computed(
+  () => `${whatsappBase}?text=${encodeURIComponent(packageMessage.value)}`,
+)
+
+function clampCountsToSize(size) {
+  let overflow = allocated.value - size
+  if (overflow <= 0) return
+
+  for (let i = giftTechniques.length - 1; i >= 0 && overflow > 0; i -= 1) {
+    const technique = giftTechniques[i]
+    const removable = Math.min(counts[technique], overflow)
+    counts[technique] -= removable
+    overflow -= removable
+  }
+}
+
+function setPackageSize(size) {
+  packageSize.value = size
+  clampCountsToSize(size)
+}
+
+function inc(technique) {
+  if (remaining.value <= 0) return
+  counts[technique] += 1
+}
+
+function dec(technique) {
+  if (counts[technique] <= 0) return
+  counts[technique] -= 1
+}
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -219,7 +285,7 @@ const fadeUp = {
         </p>
       </motion.section>
 
-      <!-- Gift voucher -->
+      <!-- Gift voucher builder -->
       <motion.section id="regalo" class="pb-10 pt-6 text-center" v-bind="fadeUp">
         <h2
           class="font-display text-4xl font-medium uppercase tracking-[0.28em] text-white sm:text-5xl"
@@ -243,24 +309,107 @@ const fadeUp = {
           Componi il tuo buono scegliendo liberamente tra le seguenti tecniche:
         </p>
 
-        <ul class="mx-auto mt-10 max-w-sm space-y-3">
-          <li
-            v-for="technique in giftTechniques"
-            :key="technique"
-            class="font-sans text-sm font-light uppercase tracking-[0.18em] text-mist/90"
+        <div class="mx-auto mt-12 max-w-md">
+          <p
+            class="font-sans text-[0.65rem] font-light uppercase tracking-[0.35em] text-fog"
           >
-            {{ technique }}
-          </li>
-        </ul>
+            Quanti massaggi?
+          </p>
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-2">
+            <button
+              v-for="size in packageSizes"
+              :key="size"
+              type="button"
+              class="inline-flex h-11 w-11 items-center justify-center border font-sans text-sm transition duration-300"
+              :class="
+                packageSize === size
+                  ? 'border-white bg-white text-navy-deep'
+                  : 'border-line text-mist hover:border-white hover:text-white'
+              "
+              :aria-pressed="packageSize === size"
+              @click="setPackageSize(size)"
+            >
+              {{ size }}
+            </button>
+          </div>
+        </div>
+
+        <div class="mx-auto mt-12 max-w-md text-left">
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <p
+              class="font-sans text-[0.65rem] font-light uppercase tracking-[0.35em] text-fog"
+            >
+              Scegli le tecniche
+            </p>
+            <p class="font-sans text-[0.65rem] font-light uppercase tracking-[0.25em] text-mist/80">
+              {{ allocated }} di {{ packageSize }} selezionati
+            </p>
+          </div>
+
+          <ul class="space-y-3">
+            <li
+              v-for="technique in giftTechniques"
+              :key="technique"
+              class="flex items-center justify-between gap-4 border-b border-line/40 py-3"
+            >
+              <span
+                class="font-sans text-sm font-light uppercase tracking-[0.12em] text-mist/90"
+              >
+                {{ technique }}
+              </span>
+              <div class="flex shrink-0 items-center gap-3">
+                <button
+                  type="button"
+                  class="inline-flex h-8 w-8 items-center justify-center border border-line text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                  :disabled="counts[technique] <= 0"
+                  :aria-label="`Riduci ${technique}`"
+                  @click="dec(technique)"
+                >
+                  −
+                </button>
+                <span
+                  class="w-4 text-center font-sans text-sm tabular-nums text-white"
+                >
+                  {{ counts[technique] }}
+                </span>
+                <button
+                  type="button"
+                  class="inline-flex h-8 w-8 items-center justify-center border border-line text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                  :disabled="remaining <= 0"
+                  :aria-label="`Aumenta ${technique}`"
+                  @click="inc(technique)"
+                >
+                  +
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <p
+          v-if="!isComplete"
+          class="mx-auto mt-8 max-w-md font-sans text-sm font-light text-fog"
+        >
+          Distribuisci tutti i {{ packageSize }} massaggi per continuare.
+        </p>
 
         <a
-          :href="whatsapp"
+          v-if="isComplete"
+          :href="packageWhatsappHref"
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-12 inline-flex min-w-[200px] items-center justify-center border border-line bg-white/10 px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
+          class="mt-10 inline-flex min-w-[240px] items-center justify-center border border-line bg-white/10 px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
         >
-          Regala ora
+          Monta il pacchetto
         </a>
+        <button
+          v-else
+          type="button"
+          disabled
+          class="mt-10 inline-flex min-w-[240px] cursor-not-allowed items-center justify-center border border-line/40 px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-fog/50"
+        >
+          Monta il pacchetto
+        </button>
       </motion.section>
 
       <!-- Contacts -->
