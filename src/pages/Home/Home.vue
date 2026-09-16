@@ -2,7 +2,6 @@
 import { motion } from 'motion-v'
 
 const whatsapp = 'https://wa.me/393343101446'
-const email = 'mailto:correaviscardiviviane@gmail.com'
 const phoneDisplay = '334.3101446'
 const phoneHref = 'tel:+393343101446'
 
@@ -65,28 +64,11 @@ const treatments = [
   },
 ]
 
-const packages = [
-  {
-    name: 'Pacchetto Benessere',
-    count: '5',
-    label: 'Trattamenti personalizzati',
-    text: 'Un percorso costruito sulle esigenze della persona.',
-    price: '70 €',
-  },
-  {
-    name: 'Pacchetto Corpo Leggero',
-    count: '5',
-    label: 'Massaggi Linfodrenanti',
-    text: 'Pensato per favorire il drenaggio dei liquidi e migliorare la sensazione di leggerezza.',
-    price: '70 €',
-  },
-  {
-    name: 'Pacchetto Relax',
-    count: '5',
-    label: 'Massaggi Rilassanti',
-    text: 'Ideale per chi desidera prendersi cura di sé con continuità.',
-    price: '70 €',
-  },
+const giftTechniques = [
+  'Massaggio Decontratturante',
+  'Massaggio Linfodrenante',
+  'Massaggio Rilassante',
+  'Massaggio Yoga Ayurvedico',
 ]
 
 const fadeUp = {
@@ -131,7 +113,7 @@ const fadeUp = {
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ delay: 0.3, duration: 0.9 }"
         >
-          Viviane
+          Viviane C.
           <span class="mt-3 block tracking-[0.28em]">Viscardi</span>
         </motion.h1>
 
@@ -237,7 +219,7 @@ const fadeUp = {
         </p>
       </motion.section>
 
-      <!-- Gift packages -->
+      <!-- Gift voucher -->
       <motion.section id="regalo" class="pb-10 pt-6 text-center" v-bind="fadeUp">
         <h2
           class="font-display text-4xl font-medium uppercase tracking-[0.28em] text-white sm:text-5xl"
@@ -252,50 +234,33 @@ const fadeUp = {
           Buono regalo
         </p>
 
-        <div class="mt-16 space-y-16">
-          <article
-            v-for="pack in packages"
-            :key="pack.name"
-            class="mx-auto max-w-md border border-transparent px-4 py-2 transition duration-300 hover:border-line"
-          >
-            <h3
-              class="font-display text-2xl font-medium uppercase tracking-[0.2em] text-white"
-            >
-              {{ pack.name }}
-            </h3>
-            <p
-              class="mt-5 inline-flex items-center gap-3 font-sans text-[0.65rem] font-light uppercase tracking-[0.32em] text-fog"
-            >
-              <span
-                class="inline-flex h-7 w-7 items-center justify-center border border-line text-[0.7rem] text-white"
-              >
-                {{ pack.count }}
-              </span>
-              {{ pack.label }}
-            </p>
-            <p class="mt-5 font-sans text-sm font-light leading-7 text-mist/85">
-              {{ pack.text }}
-            </p>
-            <p
-              class="mt-6 font-display text-3xl font-medium tracking-wide text-white"
-            >
-              {{ pack.price }}
-            </p>
-            <a
-              :href="whatsapp"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-6 inline-flex min-w-[180px] items-center justify-center border border-line px-6 py-3 font-sans text-[0.65rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:border-white hover:bg-white/5"
-            >
-              Regala ora
-            </a>
-          </article>
-        </div>
-
-        <p class="mx-auto mt-16 max-w-md font-sans text-sm font-light leading-7 text-fog">
-          Ogni pacchetto regalo include una card digitale personalizzata da inviare alla
-          persona a cui desideri regalare l'esperienza.
+        <p
+          class="mx-auto mt-12 max-w-md font-display text-2xl font-normal italic leading-relaxed text-mist/90 sm:text-3xl"
+        >
+          Da 1 a 5 massaggi, da scegliere per te o da regalare!
         </p>
+        <p class="mx-auto mt-6 max-w-md font-sans text-sm font-light leading-7 text-fog">
+          Componi il tuo buono scegliendo liberamente tra le seguenti tecniche:
+        </p>
+
+        <ul class="mx-auto mt-10 max-w-sm space-y-3">
+          <li
+            v-for="technique in giftTechniques"
+            :key="technique"
+            class="font-sans text-sm font-light uppercase tracking-[0.18em] text-mist/90"
+          >
+            {{ technique }}
+          </li>
+        </ul>
+
+        <a
+          :href="whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-12 inline-flex min-w-[200px] items-center justify-center border border-line bg-white/10 px-8 py-3.5 font-sans text-[0.7rem] font-medium uppercase tracking-[0.35em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
+        >
+          Regala ora
+        </a>
       </motion.section>
 
       <!-- Contacts -->
@@ -305,29 +270,16 @@ const fadeUp = {
         v-bind="fadeUp"
       >
         <p
-          class="font-display text-2xl font-medium uppercase tracking-[0.28em] text-white"
-        >
-          Viviane Viscardi
-        </p>
-        <p
-          class="mt-4 font-sans text-[0.65rem] font-light uppercase tracking-[0.45em] text-fog"
+          class="font-sans text-[0.65rem] font-light uppercase tracking-[0.45em] text-fog"
         >
           Contatti
         </p>
-        <div class="mt-8 flex flex-col items-center gap-3 font-sans text-sm font-light">
-          <a
-            :href="phoneHref"
-            class="text-mist transition hover:text-white"
-          >
-            {{ phoneDisplay }}
-          </a>
-          <a
-            :href="email"
-            class="break-all text-mist transition hover:text-white"
-          >
-            correaviscardiviviane@gmail.com
-          </a>
-        </div>
+        <a
+          :href="phoneHref"
+          class="mt-8 inline-block font-sans text-lg font-light tracking-[0.12em] text-mist transition hover:text-white"
+        >
+          {{ phoneDisplay }}
+        </a>
         <a
           :href="whatsapp"
           target="_blank"
