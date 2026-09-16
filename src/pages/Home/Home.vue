@@ -1,6 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import { motion } from 'motion-v'
+import bgMobile from '../../assets/images/bg-mobile.jpg'
 
 const whatsappBase = 'https://wa.me/393343101446'
 const whatsapp = whatsappBase
@@ -147,13 +148,25 @@ const fadeUp = {
 
 <template>
   <div class="relative min-h-screen overflow-x-hidden bg-navy-deep text-mist">
+    <!-- Desktop / tablet fallback atmosphere -->
     <div
-      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.06),transparent_55%),linear-gradient(180deg,#0a1630_0%,#050b18_45%,#07101f_100%)]"
+      class="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.06),transparent_55%),linear-gradient(180deg,#0a1630_0%,#050b18_45%,#07101f_100%)] sm:block"
     />
     <img
       src="../../assets/images/organic-lines.svg"
       alt=""
-      class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-100"
+      class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover sm:block"
+    />
+
+    <!-- Mobile floral background from brand PDF -->
+    <div
+      class="pointer-events-none absolute inset-0 bg-navy-deep bg-repeat-y bg-[length:100%_auto] sm:hidden"
+      :style="{ backgroundImage: `url(${bgMobile})` }"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none absolute inset-0 bg-navy-deep/20 sm:hidden"
+      aria-hidden="true"
     />
 
     <div class="relative z-10 mx-auto w-full max-w-[34rem] px-6 pb-24 sm:px-8">
