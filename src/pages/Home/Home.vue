@@ -1,6 +1,7 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
-import { motion } from 'motion-v'
+import { ref } from 'vue'
+import { AnimatePresence, motion } from 'motion-v'
+import PackageBuilder from '../../components/PackageBuilder.vue'
 import bgMobile from '../../assets/images/bg-mobile.webp'
 
 const whatsappBase = 'https://wa.me/393343101446'
@@ -74,68 +75,22 @@ const giftTechniques = [
   'Massaggio Yoga Ayurvedico',
 ]
 
-const packageSizes = [1, 2, 3, 4, 5]
-const packageSize = ref(3)
-const counts = reactive(
-  Object.fromEntries(giftTechniques.map((technique) => [technique, 0])),
-)
+const giftSizes = [1, 2, 3, 4, 5]
+const bookingSizes = [1, 2, 3, 4]
 
-const allocated = computed(() =>
-  giftTechniques.reduce((sum, technique) => sum + counts[technique], 0),
-)
-const remaining = computed(() => packageSize.value - allocated.value)
-const isComplete = computed(
-  () => packageSize.value >= 1 && allocated.value === packageSize.value,
-)
+const specificTechniques = [
+  'Trattamento Personalizzato',
+  ...treatments.map((treatment) => treatment.title),
+]
 
-const selectedLines = computed(() =>
-  giftTechniques
-    .filter((technique) => counts[technique] > 0)
-    .map((technique) => `- ${technique}: ${counts[technique]}`),
-)
+const personalizedOpen = ref(false)
+const specificOpen = ref(false)
 
-const packageMessage = computed(() => {
-  const lines = [
-    'Ciao Viviane! Vorrei comporre un buono regalo.',
-    '',
-    `Totale massaggi: ${packageSize.value}`,
-    '',
-    ...selectedLines.value,
-    '',
-    'Puoi darmi più informazioni? Grazie!',
-  ]
-  return lines.join('\n')
-})
-
-const packageWhatsappHref = computed(
-  () => `${whatsappBase}?text=${encodeURIComponent(packageMessage.value)}`,
-)
-
-function clampCountsToSize(size) {
-  let overflow = allocated.value - size
-  if (overflow <= 0) return
-
-  for (let i = giftTechniques.length - 1; i >= 0 && overflow > 0; i -= 1) {
-    const technique = giftTechniques[i]
-    const removable = Math.min(counts[technique], overflow)
-    counts[technique] -= removable
-    overflow -= removable
-  }
-}
-
-function setPackageSize(size) {
-  packageSize.value = size
-  clampCountsToSize(size)
-}
-
-function inc(technique) {
-  if (remaining.value <= 0) return
-  counts[technique] += 1
-}
-
-function dec(technique) {
-  if (counts[technique] <= 0) return
-  counts[technique] -= 1
+const revealBox = {
+  initial: { opacity: 0, height: 0 },
+  animate: { opacity: 1, height: 'auto' },
+  exit: { opacity: 0, height: 0 },
+  transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
 }
 
 const fadeUp = {
@@ -277,6 +232,46 @@ const fadeUp = {
             trattamento scegliere oppure desidera un approccio più completo e
             personalizzato.
           </p>
+
+          <button
+            type="button"
+            class="mt-10 inline-flex w-full items-center justify-center border border-white/70 px-6 py-3.5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] transition duration-300 sm:w-auto sm:px-8"
+            :class="
+              personalizedOpen
+                ? 'bg-white text-navy-deep'
+                : 'text-white hover:bg-white hover:text-navy-deep'
+            "
+            :aria-expanded="personalizedOpen"
+            aria-controls="prenota-personalizzato"
+            @click="personalizedOpen = !personalizedOpen"
+          >
+            Prenota trattamento personalizzato
+          </button>
+
+          <AnimatePresence>
+            <motion.div
+              v-if="personalizedOpen"
+              id="prenota-personalizzato"
+              class="overflow-hidden"
+              v-bind="revealBox"
+            >
+              <div class="mt-8 border-t border-white/30 pt-8">
+                <PackageBuilder
+                  :whatsapp-base="whatsappBase"
+                  :techniques="['Trattamento Personalizzato']"
+                  :sizes="bookingSizes"
+                  :default-size="1"
+                  size-label="Quante sedute?"
+                  unit-label="sedute"
+                  total-label="Numero di sedute"
+                  message-intro="Ciao Viviane! Vorrei prenotare un Trattamento Personalizzato."
+                  message-outro="Puoi indicarmi le tue disponibilità? Grazie!"
+                  submit-label="Prenota ora"
+                  plain-message-label="Oppure invia un messaggio"
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </motion.article>
 
         <motion.div class="mx-auto max-w-md text-center" v-bind="fadeUp">
@@ -330,6 +325,50 @@ const fadeUp = {
             </li>
           </ul>
         </motion.article>
+
+        <motion.div class="mx-auto max-w-md text-center" v-bind="fadeUp">
+          <div class="mx-auto mb-12 h-px w-full bg-white/40" />
+          <button
+            type="button"
+            class="inline-flex w-full items-center justify-center border border-white/70 px-6 py-3.5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] transition duration-300 sm:w-auto sm:px-8"
+            :class="
+              specificOpen
+                ? 'bg-white text-navy-deep'
+                : 'text-white hover:bg-white hover:text-navy-deep'
+            "
+            :aria-expanded="specificOpen"
+            aria-controls="prenota-specifici"
+            @click="specificOpen = !specificOpen"
+          >
+            Prenota un massaggio specifico
+          </button>
+
+          <AnimatePresence>
+            <motion.div
+              v-if="specificOpen"
+              id="prenota-specifici"
+              class="overflow-hidden"
+              v-bind="revealBox"
+            >
+              <div class="mt-8 border border-white/40 px-5 py-8 sm:px-7">
+                <PackageBuilder
+                  :whatsapp-base="whatsappBase"
+                  :techniques="specificTechniques"
+                  :sizes="bookingSizes"
+                  :default-size="1"
+                  size-label="Quanti trattamenti?"
+                  techniques-label="Scegli i trattamenti"
+                  unit-label="trattamenti"
+                  total-label="Totale trattamenti"
+                  message-intro="Ciao Viviane! Vorrei prenotare dei trattamenti."
+                  message-outro="Puoi indicarmi le tue disponibilità? Grazie!"
+                  submit-label="Prenota ora"
+                  plain-message-label="Oppure invia un messaggio"
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
       </section>
 
       <!-- Mid CTA -->
@@ -378,109 +417,16 @@ const fadeUp = {
           Componi il tuo buono scegliendo liberamente tra le seguenti tecniche:
         </p>
 
-        <div class="mx-auto mt-12 max-w-md">
-          <p
-            class="font-sans text-[0.62rem] font-medium uppercase tracking-[0.32em] text-fog"
-          >
-            Quanti massaggi?
-          </p>
-          <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5">
-            <button
-              v-for="size in packageSizes"
-              :key="size"
-              type="button"
-              class="inline-flex h-11 w-11 items-center justify-center border font-sans text-sm font-medium transition duration-300"
-              :class="
-                packageSize === size
-                  ? 'border-white bg-white text-navy-deep'
-                  : 'border-white/70 text-mist hover:border-white hover:text-white'
-              "
-              :aria-pressed="packageSize === size"
-              @click="setPackageSize(size)"
-            >
-              {{ size }}
-            </button>
-          </div>
-        </div>
-
-        <div class="mx-auto mt-12 max-w-md text-left">
-          <div class="mb-5 flex items-center justify-between gap-4">
-            <p
-              class="font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] text-fog"
-            >
-              Scegli le tecniche
-            </p>
-            <p
-              class="font-sans text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/75"
-            >
-              {{ allocated }} di {{ packageSize }} selezionati
-            </p>
-          </div>
-
-          <ul class="space-y-1">
-            <li
-              v-for="technique in giftTechniques"
-              :key="technique"
-              class="flex items-center justify-between gap-4 border-b border-white/20 py-3.5"
-            >
-              <span
-                class="font-sans text-[0.78rem] font-medium uppercase tracking-[0.1em] text-white/90"
-              >
-                {{ technique }}
-              </span>
-              <div class="flex shrink-0 items-center gap-3">
-                <button
-                  type="button"
-                  class="inline-flex h-8 w-8 items-center justify-center border border-white/70 text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-                  :disabled="counts[technique] <= 0"
-                  :aria-label="`Riduci ${technique}`"
-                  @click="dec(technique)"
-                >
-                  −
-                </button>
-                <span
-                  class="w-4 text-center font-sans text-sm font-medium tabular-nums text-white"
-                >
-                  {{ counts[technique] }}
-                </span>
-                <button
-                  type="button"
-                  class="inline-flex h-8 w-8 items-center justify-center border border-white/70 text-mist transition hover:border-white hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
-                  :disabled="remaining <= 0"
-                  :aria-label="`Aumenta ${technique}`"
-                  @click="inc(technique)"
-                >
-                  +
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <p
-          v-if="!isComplete"
-          class="mx-auto mt-8 max-w-md font-sans text-[0.85rem] font-normal text-white/65"
-        >
-          Distribuisci tutti i {{ packageSize }} massaggi per continuare.
-        </p>
-
-        <a
-          v-if="isComplete"
-          :href="packageWhatsappHref"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="mt-10 inline-flex min-w-[240px] items-center justify-center border border-white/70 bg-white/10 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
-        >
-          Monta il pacchetto
-        </a>
-        <button
-          v-else
-          type="button"
-          disabled
-          class="mt-10 inline-flex min-w-[240px] cursor-not-allowed items-center justify-center border border-white/30 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white/40"
-        >
-          Monta il pacchetto
-        </button>
+        <PackageBuilder
+          class="mt-12"
+          :whatsapp-base="whatsappBase"
+          :techniques="giftTechniques"
+          :sizes="giftSizes"
+          :default-size="3"
+          message-intro="Ciao Viviane! Vorrei comporre un buono regalo."
+          message-outro="Puoi darmi più informazioni? Grazie!"
+          submit-label="Monta il pacchetto"
+        />
       </motion.section>
 
       <!-- Contacts -->
