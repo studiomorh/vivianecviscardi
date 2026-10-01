@@ -75,8 +75,7 @@ const giftTechniques = [
   'Massaggio Yoga Ayurvedico',
 ]
 
-const giftSizes = [1, 2, 3, 4, 5]
-const bookingSizes = [1, 2, 3, 4]
+const packageSizes = [1, 2, 3, 4]
 
 const specificTechniques = [
   'Trattamento Personalizzato',
@@ -259,7 +258,7 @@ const fadeUp = {
                 <PackageBuilder
                   :whatsapp-base="whatsappBase"
                   :techniques="['Trattamento Personalizzato']"
-                  :sizes="bookingSizes"
+                  :sizes="packageSizes"
                   :default-size="1"
                   size-label="Quante sedute?"
                   unit-label="sedute"
@@ -354,7 +353,7 @@ const fadeUp = {
                 <PackageBuilder
                   :whatsapp-base="whatsappBase"
                   :techniques="specificTechniques"
-                  :sizes="bookingSizes"
+                  :sizes="packageSizes"
                   :default-size="1"
                   size-label="Quanti trattamenti?"
                   techniques-label="Scegli i trattamenti"
@@ -409,7 +408,7 @@ const fadeUp = {
         <p
           class="mx-auto mt-10 max-w-md font-sans text-[0.95rem] font-normal leading-[1.7] text-white/90"
         >
-          Da 1 a 5 massaggi, da scegliere per te o da regalare!
+          Da 1 a 4 massaggi, da scegliere per te o da regalare!
         </p>
         <p
           class="mx-auto mt-5 max-w-md font-sans text-[0.9rem] font-normal leading-[1.7] text-white/75"
@@ -421,7 +420,7 @@ const fadeUp = {
           class="mt-12"
           :whatsapp-base="whatsappBase"
           :techniques="giftTechniques"
-          :sizes="giftSizes"
+          :sizes="packageSizes"
           :default-size="3"
           message-intro="Ciao Viviane! Vorrei comporre un buono regalo."
           message-outro="Puoi darmi più informazioni? Grazie!"
