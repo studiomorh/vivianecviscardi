@@ -162,16 +162,16 @@ const fadeUp = {
           :transition="{ delay: 0.7, duration: 0.75 }"
         >
           <a
+            href="#trattamenti"
+            class="inline-flex min-h-12 items-center justify-center border border-white bg-white px-8 py-3.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-navy-deep transition duration-300 hover:bg-white/85"
+          >
+            I trattamenti
+          </a>
+          <a
             href="#regalo"
             class="inline-flex min-h-12 items-center justify-center border border-white/70 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white hover:text-navy-deep"
           >
             Buono regalo
-          </a>
-          <a
-            href="#trattamenti"
-            class="inline-flex min-h-12 items-center justify-center border border-white/70 px-8 py-3.5 font-sans text-[0.65rem] font-medium uppercase tracking-[0.32em] text-white transition duration-300 hover:bg-white/10"
-          >
-            I trattamenti
           </a>
         </motion.div>
       </motion.header>
