@@ -224,6 +224,75 @@ const fadeUp = {
 
       <!-- Treatments -->
       <section id="trattamenti" class="space-y-28 py-8 sm:space-y-32">
+        <motion.div class="mx-auto max-w-md text-center" v-bind="fadeUp">
+          <h2
+            class="font-sans text-[1.15rem] font-semibold uppercase leading-snug tracking-[0.22em] text-white sm:text-[1.3rem] sm:tracking-[0.26em]"
+          >
+            Un trattamento su misura, oppure la tecnica che preferisci
+          </h2>
+          <p
+            class="mt-8 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/88"
+          >
+            Ogni corpo ha delle esigenze diverse, e per questo, il cuore del mio lavoro è
+            un trattamento personalizzato: una seduta costruita dall’ascolto del corpo,
+            nella quale posso integrare diverse tecniche manuali, ayurvediche,
+            rilassanti, decontratturanti, drenanti e di stretching, in base alle esigenze
+            di ogni persona.
+          </p>
+          <p
+            class="mt-5 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/78"
+          >
+            Ho sviluppato un approccio che integra tecniche e conoscenze diverse in modo
+            attento e personalizzato. In ogni seduta, l’intensità, il ritmo e le tecniche
+            utilizzate vengono scelti in base alle esigenze percepite nel corpo e
+            all’obiettivo di ciascuna persona.
+          </p>
+          <p
+            class="mt-5 font-sans text-[0.92rem] font-medium leading-[1.75] text-white"
+          >
+            Se sai già quale tecnica desideri ricevere, puoi anche scegliere direttamente
+            uno dei trattamenti specifici.
+          </p>
+        </motion.div>
+
+        <motion.article
+          class="mx-auto max-w-md border border-white/70 px-6 py-10 text-center sm:px-8"
+          v-bind="fadeUp"
+        >
+          <h2
+            class="font-sans text-[1.15rem] font-semibold uppercase leading-snug tracking-[0.22em] text-white sm:text-[1.3rem] sm:tracking-[0.26em]"
+          >
+            Trattamento Personalizzato
+          </h2>
+          <p
+            class="mt-8 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/88"
+          >
+            Una seduta creata su misura, combinando tecniche diverse in base alle esigenze
+            del corpo e al tuo obiettivo di benessere.
+          </p>
+          <p
+            class="mt-5 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/78"
+          >
+            È ideale per chi presenta diversi tipi di tensione, non sa esattamente quale
+            trattamento scegliere oppure desidera un approccio più completo e
+            personalizzato.
+          </p>
+        </motion.article>
+
+        <motion.div class="mx-auto max-w-md text-center" v-bind="fadeUp">
+          <h2
+            class="font-sans text-[1.15rem] font-semibold uppercase leading-snug tracking-[0.22em] text-white sm:text-[1.3rem] sm:tracking-[0.26em]"
+          >
+            Massaggi specifici
+          </h2>
+          <p
+            class="mt-6 font-sans text-[0.92rem] font-normal leading-[1.75] text-white/88"
+          >
+            Se preferisci un trattamento mirato, puoi scegliere tra:
+          </p>
+          <div class="mx-auto mt-10 h-px w-full bg-white/40" />
+        </motion.div>
+
         <motion.article
           v-for="(item, index) in treatments"
           :key="item.title"
